@@ -31,7 +31,7 @@ exports.handler = function (event, context, callback) {
         if (res.total_count === 0) return callback(null);
         let msg = "以下のチケットが本日締め切りです\n";
         for (const issue of res.issues) {
-            msg += `[${issue.project.name}] ${issue.subject} ${process.env.REDMINEURL}/${issue.id}\n`;
+            msg += `[${issue.project.name}] ${issue.subject} ${process.env.REDMINEURL}/issues/${issue.id}\n`;
         }
         slack("redmine", msg).then(status => {
             callback(null, {
